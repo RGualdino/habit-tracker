@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateHabitDto } from './dto/create-habit.dto';
 
@@ -25,5 +25,20 @@ export class HabitsService {
         userId,
       },
     });
+  }
+
+  async findOneForUser(userId: number, habitId: number) {
+    const habit = await this.prisma.habit.findFirst({
+      where: {
+        id: habitId,
+        userId,
+      },
+    });
+
+    if (!habit) {
+      throw new NotFoundException('Habit not found');
+    }
+
+    return habit;
   }
 }

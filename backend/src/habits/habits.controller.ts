@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { HabitsService } from './habits.service';
 import { JwtGuard } from '../auth/guards/jwt.guard';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
@@ -21,5 +21,10 @@ export class HabitsController {
     @Body() createHabitDto: CreateHabitDto,
   ) {
     return this.habitsService.createForUser(user.userId, createHabitDto);
+  }
+
+  @Get(':id')
+  findOne(@CurrentUser() user: AuthenticatedUser, @Param('id') id: string) {
+    return this.habitsService.findOneForUser(user.userId, Number(id));
   }
 }
