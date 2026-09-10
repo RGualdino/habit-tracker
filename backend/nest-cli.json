@@ -6,7 +6,7 @@
     "assets": [
       {
         "include": "generated/**/*",
-        "watchAssets": true
+        "watchAssets": false
       }
     ]
   }

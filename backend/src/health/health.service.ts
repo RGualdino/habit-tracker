@@ -3,7 +3,6 @@ import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class HealthService {
-
   constructor(private readonly prisma: PrismaService) {}
 
   async getHealth() {
