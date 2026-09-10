@@ -1,26 +1,18 @@
 import { Injectable } from '@nestjs/common';
-import { CreateHabitDto } from './dto/create-habit.dto';
-import { UpdateHabitDto } from './dto/update-habit.dto';
+import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class HabitsService {
-  create(createHabitDto: CreateHabitDto) {
-    return 'This action adds a new habit';
-  }
+  constructor(private readonly prisma: PrismaService) {}
 
-  findAll() {
-    return `This action returns all habits`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} habit`;
-  }
-
-  update(id: number, updateHabitDto: UpdateHabitDto) {
-    return `This action updates a #${id} habit`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} habit`;
+  async findAllForUser(userId: number) {
+    return this.prisma.habit.findMany({
+      where: {
+        userId,
+      },
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
   }
 }
