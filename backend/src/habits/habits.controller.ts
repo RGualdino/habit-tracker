@@ -7,6 +7,7 @@ import {
   Patch,
   UseGuards,
   Delete,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { HabitsService } from './habits.service';
 import { JwtGuard } from '../auth/guards/jwt.guard';
@@ -34,25 +35,27 @@ export class HabitsController {
   }
 
   @Get(':id')
-  findOne(@CurrentUser() user: AuthenticatedUser, @Param('id') id: string) {
-    return this.habitsService.findOneForUser(user.userId, Number(id));
+  findOne(
+    @CurrentUser() user: AuthenticatedUser,
+    @Param('id', ParseIntPipe) id: number,
+  ) {
+    return this.habitsService.findOneForUser(user.userId, id);
   }
 
   @Patch(':id')
   update(
     @CurrentUser() user: AuthenticatedUser,
-    @Param('id') id: string,
+    @Param('id', ParseIntPipe) id: number,
     @Body() updateHabitDto: UpdateHabitDto,
   ) {
-    return this.habitsService.updateForUser(
-      user.userId,
-      Number(id),
-      updateHabitDto,
-    );
+    return this.habitsService.updateForUser(user.userId, id, updateHabitDto);
   }
 
   @Delete(':id')
-  remove(@CurrentUser() user: AuthenticatedUser, @Param('id') id: string) {
-    return this.habitsService.deleteForUser(user.userId, Number(id));
+  remove(
+    @CurrentUser() user: AuthenticatedUser,
+    @Param('id', ParseIntPipe) id: number,
+  ) {
+    return this.habitsService.deleteForUser(user.userId, id);
   }
 }
