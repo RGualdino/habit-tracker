@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
+import { CreateHabitDto } from './dto/create-habit.dto';
 
 @Injectable()
 export class HabitsService {
@@ -12,6 +13,16 @@ export class HabitsService {
       },
       orderBy: {
         createdAt: 'desc',
+      },
+    });
+  }
+
+  async createForUser(userId: number, createHabitDto: CreateHabitDto) {
+    return this.prisma.habit.create({
+      data: {
+        title: createHabitDto.title,
+        description: createHabitDto.description,
+        userId,
       },
     });
   }
