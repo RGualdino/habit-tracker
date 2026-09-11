@@ -4,6 +4,7 @@ import { HealthModule } from './health/health.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { AuthModule } from './auth/auth.module';
 import { HabitsModule } from './habits/habits.module';
+import { HabitLogsModule } from './habit-logs/habit-logs.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { HabitsModule } from './habits/habits.module';
     HealthModule,
     AuthModule,
     HabitsModule,
+    HabitLogsModule,
   ],
 })
 export class AppModule {}
