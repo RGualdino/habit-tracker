@@ -1,6 +1,7 @@
 import {
   Controller,
   Delete,
+  Get,
   Param,
   ParseIntPipe,
   Post,
@@ -12,11 +13,11 @@ import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import type { AuthenticatedUser } from '../auth/types/authenticated-user';
 
 @UseGuards(JwtGuard)
-@Controller('habits/:habitId/complete')
+@Controller('habits/:habitId')
 export class HabitLogsController {
   constructor(private readonly habitLogsService: HabitLogsService) {}
 
-  @Post()
+  @Post('complete')
   complete(
     @CurrentUser() user: AuthenticatedUser,
     @Param('habitId', ParseIntPipe) habitId: number,
@@ -24,11 +25,19 @@ export class HabitLogsController {
     return this.habitLogsService.completeForUser(user.userId, habitId);
   }
 
-  @Delete()
+  @Delete('complete')
   uncomplete(
     @CurrentUser() user: AuthenticatedUser,
     @Param('habitId', ParseIntPipe) habitId: number,
   ) {
     return this.habitLogsService.uncompleteForUser(user.userId, habitId);
+  }
+
+  @Get('history')
+  history(
+    @CurrentUser() user: AuthenticatedUser,
+    @Param('habitId', ParseIntPipe) habitId: number,
+  ) {
+    return this.habitLogsService.getHistoryForUser(user.userId, habitId);
   }
 }
