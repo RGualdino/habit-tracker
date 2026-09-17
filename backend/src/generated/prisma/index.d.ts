@@ -3388,19 +3388,19 @@ export namespace Prisma {
 
   export type HabitLogMinAggregateOutputType = {
     id: number | null
-    completedAt: Date | null
+    date: Date | null
     habitId: number | null
   }
 
   export type HabitLogMaxAggregateOutputType = {
     id: number | null
-    completedAt: Date | null
+    date: Date | null
     habitId: number | null
   }
 
   export type HabitLogCountAggregateOutputType = {
     id: number
-    completedAt: number
+    date: number
     habitId: number
     _all: number
   }
@@ -3418,19 +3418,19 @@ export namespace Prisma {
 
   export type HabitLogMinAggregateInputType = {
     id?: true
-    completedAt?: true
+    date?: true
     habitId?: true
   }
 
   export type HabitLogMaxAggregateInputType = {
     id?: true
-    completedAt?: true
+    date?: true
     habitId?: true
   }
 
   export type HabitLogCountAggregateInputType = {
     id?: true
-    completedAt?: true
+    date?: true
     habitId?: true
     _all?: true
   }
@@ -3523,7 +3523,7 @@ export namespace Prisma {
 
   export type HabitLogGroupByOutputType = {
     id: number
-    completedAt: Date
+    date: Date
     habitId: number
     _count: HabitLogCountAggregateOutputType | null
     _avg: HabitLogAvgAggregateOutputType | null
@@ -3548,32 +3548,32 @@ export namespace Prisma {
 
   export type HabitLogSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    completedAt?: boolean
+    date?: boolean
     habitId?: boolean
     habit?: boolean | HabitDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["habitLog"]>
 
   export type HabitLogSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    completedAt?: boolean
+    date?: boolean
     habitId?: boolean
     habit?: boolean | HabitDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["habitLog"]>
 
   export type HabitLogSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    completedAt?: boolean
+    date?: boolean
     habitId?: boolean
     habit?: boolean | HabitDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["habitLog"]>
 
   export type HabitLogSelectScalar = {
     id?: boolean
-    completedAt?: boolean
+    date?: boolean
     habitId?: boolean
   }
 
-  export type HabitLogOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "completedAt" | "habitId", ExtArgs["result"]["habitLog"]>
+  export type HabitLogOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "date" | "habitId", ExtArgs["result"]["habitLog"]>
   export type HabitLogInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     habit?: boolean | HabitDefaultArgs<ExtArgs>
   }
@@ -3591,7 +3591,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      completedAt: Date
+      date: Date
       habitId: number
     }, ExtArgs["result"]["habitLog"]>
     composites: {}
@@ -4018,7 +4018,7 @@ export namespace Prisma {
    */
   interface HabitLogFieldRefs {
     readonly id: FieldRef<"HabitLog", 'Int'>
-    readonly completedAt: FieldRef<"HabitLog", 'DateTime'>
+    readonly date: FieldRef<"HabitLog", 'DateTime'>
     readonly habitId: FieldRef<"HabitLog", 'Int'>
   }
     
@@ -4476,7 +4476,7 @@ export namespace Prisma {
 
   export const HabitLogScalarFieldEnum: {
     id: 'id',
-    completedAt: 'completedAt',
+    date: 'date',
     habitId: 'habitId'
   };
 
@@ -4688,31 +4688,32 @@ export namespace Prisma {
     OR?: HabitLogWhereInput[]
     NOT?: HabitLogWhereInput | HabitLogWhereInput[]
     id?: IntFilter<"HabitLog"> | number
-    completedAt?: DateTimeFilter<"HabitLog"> | Date | string
+    date?: DateTimeFilter<"HabitLog"> | Date | string
     habitId?: IntFilter<"HabitLog"> | number
     habit?: XOR<HabitScalarRelationFilter, HabitWhereInput>
   }
 
   export type HabitLogOrderByWithRelationInput = {
     id?: SortOrder
-    completedAt?: SortOrder
+    date?: SortOrder
     habitId?: SortOrder
     habit?: HabitOrderByWithRelationInput
   }
 
   export type HabitLogWhereUniqueInput = Prisma.AtLeast<{
     id?: number
+    habitId_date?: HabitLogHabitIdDateCompoundUniqueInput
     AND?: HabitLogWhereInput | HabitLogWhereInput[]
     OR?: HabitLogWhereInput[]
     NOT?: HabitLogWhereInput | HabitLogWhereInput[]
-    completedAt?: DateTimeFilter<"HabitLog"> | Date | string
+    date?: DateTimeFilter<"HabitLog"> | Date | string
     habitId?: IntFilter<"HabitLog"> | number
     habit?: XOR<HabitScalarRelationFilter, HabitWhereInput>
-  }, "id">
+  }, "id" | "habitId_date">
 
   export type HabitLogOrderByWithAggregationInput = {
     id?: SortOrder
-    completedAt?: SortOrder
+    date?: SortOrder
     habitId?: SortOrder
     _count?: HabitLogCountOrderByAggregateInput
     _avg?: HabitLogAvgOrderByAggregateInput
@@ -4726,7 +4727,7 @@ export namespace Prisma {
     OR?: HabitLogScalarWhereWithAggregatesInput[]
     NOT?: HabitLogScalarWhereWithAggregatesInput | HabitLogScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"HabitLog"> | number
-    completedAt?: DateTimeWithAggregatesFilter<"HabitLog"> | Date | string
+    date?: DateTimeWithAggregatesFilter<"HabitLog"> | Date | string
     habitId?: IntWithAggregatesFilter<"HabitLog"> | number
   }
 
@@ -4837,40 +4838,40 @@ export namespace Prisma {
   }
 
   export type HabitLogCreateInput = {
-    completedAt?: Date | string
+    date?: Date | string
     habit: HabitCreateNestedOneWithoutLogsInput
   }
 
   export type HabitLogUncheckedCreateInput = {
     id?: number
-    completedAt?: Date | string
+    date?: Date | string
     habitId: number
   }
 
   export type HabitLogUpdateInput = {
-    completedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
     habit?: HabitUpdateOneRequiredWithoutLogsNestedInput
   }
 
   export type HabitLogUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    completedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
     habitId?: IntFieldUpdateOperationsInput | number
   }
 
   export type HabitLogCreateManyInput = {
     id?: number
-    completedAt?: Date | string
+    date?: Date | string
     habitId: number
   }
 
   export type HabitLogUpdateManyMutationInput = {
-    completedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type HabitLogUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    completedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
     habitId?: IntFieldUpdateOperationsInput | number
   }
 
@@ -5090,9 +5091,14 @@ export namespace Prisma {
     isNot?: HabitWhereInput
   }
 
+  export type HabitLogHabitIdDateCompoundUniqueInput = {
+    habitId: number
+    date: Date | string
+  }
+
   export type HabitLogCountOrderByAggregateInput = {
     id?: SortOrder
-    completedAt?: SortOrder
+    date?: SortOrder
     habitId?: SortOrder
   }
 
@@ -5103,13 +5109,13 @@ export namespace Prisma {
 
   export type HabitLogMaxOrderByAggregateInput = {
     id?: SortOrder
-    completedAt?: SortOrder
+    date?: SortOrder
     habitId?: SortOrder
   }
 
   export type HabitLogMinOrderByAggregateInput = {
     id?: SortOrder
-    completedAt?: SortOrder
+    date?: SortOrder
     habitId?: SortOrder
   }
 
@@ -5457,12 +5463,12 @@ export namespace Prisma {
   }
 
   export type HabitLogCreateWithoutHabitInput = {
-    completedAt?: Date | string
+    date?: Date | string
   }
 
   export type HabitLogUncheckedCreateWithoutHabitInput = {
     id?: number
-    completedAt?: Date | string
+    date?: Date | string
   }
 
   export type HabitLogCreateOrConnectWithoutHabitInput = {
@@ -5520,7 +5526,7 @@ export namespace Prisma {
     OR?: HabitLogScalarWhereInput[]
     NOT?: HabitLogScalarWhereInput | HabitLogScalarWhereInput[]
     id?: IntFilter<"HabitLog"> | number
-    completedAt?: DateTimeFilter<"HabitLog"> | Date | string
+    date?: DateTimeFilter<"HabitLog"> | Date | string
     habitId?: IntFilter<"HabitLog"> | number
   }
 
@@ -5601,21 +5607,21 @@ export namespace Prisma {
 
   export type HabitLogCreateManyHabitInput = {
     id?: number
-    completedAt?: Date | string
+    date?: Date | string
   }
 
   export type HabitLogUpdateWithoutHabitInput = {
-    completedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type HabitLogUncheckedUpdateWithoutHabitInput = {
     id?: IntFieldUpdateOperationsInput | number
-    completedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type HabitLogUncheckedUpdateManyWithoutHabitInput = {
     id?: IntFieldUpdateOperationsInput | number
-    completedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

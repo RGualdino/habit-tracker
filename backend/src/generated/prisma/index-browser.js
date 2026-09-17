@@ -137,7 +137,7 @@ exports.Prisma.HabitScalarFieldEnum = {
 
 exports.Prisma.HabitLogScalarFieldEnum = {
   id: 'id',
-  completedAt: 'completedAt',
+  date: 'date',
   habitId: 'habitId'
 };
 

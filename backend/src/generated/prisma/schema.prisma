@@ -29,9 +29,11 @@ model Habit {
 }
 
 model HabitLog {
-  id          Int      @id @default(autoincrement())
-  completedAt DateTime @default(now())
+  id   Int      @id @default(autoincrement())
+  date DateTime @default(now()) @db.Date
 
   habitId Int
   habit   Habit @relation(fields: [habitId], references: [id])
+
+  @@unique([habitId, date])
 }
