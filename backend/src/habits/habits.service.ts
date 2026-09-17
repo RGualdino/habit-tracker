@@ -46,10 +46,22 @@ export class HabitsService {
   }
 
   async findOneForUser(userId: number, habitId: number) {
+    const today = new Date();
+
     const habit = await this.prisma.habit.findFirst({
       where: {
         id: habitId,
         userId,
+      },
+      include: {
+        logs: {
+          where: {
+            date: today,
+          },
+          select: {
+            id: true,
+          },
+        },
       },
     });
 
@@ -57,7 +69,12 @@ export class HabitsService {
       throw new NotFoundException('Habit not found');
     }
 
-    return habit;
+    const { logs, ...habitData } = habit;
+
+    return {
+      ...habitData,
+      completedToday: Array.isArray(logs) ? logs.length > 0 : false,
+    };
   }
 
   async updateForUser(
