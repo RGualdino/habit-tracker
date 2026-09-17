@@ -8,14 +8,31 @@ export class HabitsService {
   constructor(private readonly prisma: PrismaService) {}
 
   async findAllForUser(userId: number) {
-    return this.prisma.habit.findMany({
+    const today = new Date();
+
+    const habits = await this.prisma.habit.findMany({
       where: {
         userId,
       },
       orderBy: {
         createdAt: 'desc',
       },
+      include: {
+        logs: {
+          where: {
+            date: today,
+          },
+          select: {
+            id: true,
+          },
+        },
+      },
     });
+
+    return habits.map(({ logs, ...habit }) => ({
+      ...habit,
+      completedToday: Array.isArray(logs) ? logs.length > 0 : false,
+    }));
   }
 
   async createForUser(userId: number, createHabitDto: CreateHabitDto) {
