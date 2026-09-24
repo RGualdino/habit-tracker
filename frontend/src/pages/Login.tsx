@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { login } from '../api/auth';
+import { setToken } from '../auth/token';
 
 interface LoginForm {
   email: string;
@@ -20,8 +21,8 @@ function Login() {
     try {
       const response = await login(data);
 
-      console.log('LOGIN RESPONSE:', response);
-
+      setToken(response.access_token);
+      
       navigate('/');
     } catch (error) {
       console.error('LOGIN ERROR:', error);
