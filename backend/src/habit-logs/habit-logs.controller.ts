@@ -40,4 +40,12 @@ export class HabitLogsController {
   ) {
     return this.habitLogsService.getHistoryForUser(user.userId, habitId);
   }
+
+  @Get('streak')
+  streak(
+    @CurrentUser() user: AuthenticatedUser,
+    @Param('habitId', ParseIntPipe) habitId: number,
+  ) {
+    return this.habitLogsService.getStreakForUser(user.userId, habitId);
+  }
 }
