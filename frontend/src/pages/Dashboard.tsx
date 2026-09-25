@@ -15,40 +15,54 @@ function Dashboard() {
 
   if (isLoading) {
     return (
-      <div className="mx-auto max-w-4xl px-4 py-8">
+      <main className="mx-auto max-w-4xl px-4 py-8">
         <p className="text-gray-600">Loading habits...</p>
-      </div>
+      </main>
     );
   }
 
   if (isError) {
     return (
-      <div className="mx-auto max-w-4xl px-4 py-8">
+      <main className="mx-auto max-w-4xl px-4 py-8">
         <p className="text-red-600">
           Something went wrong while loading your habits.
         </p>
-      </div>
+      </main>
     );
   }
+
+  const habitCount = habits?.length ?? 0;
 
   return (
     <main className="mx-auto max-w-4xl px-4 py-8">
       <header className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">My Habits</h1>
-        <p className="mt-2 text-gray-600">
-          Build consistency, one day at a time.
-        </p>
+        <div className="flex items-end justify-between gap-4">
+          <div>
+            <h1 className="text-3xl font-bold text-gray-900">
+              My Habits
+            </h1>
+            <p className="mt-2 text-gray-600">
+              Build consistency, one day at a time.
+            </p>
+          </div>
+
+          <span className="shrink-0 rounded-full bg-gray-100 px-3 py-1 text-sm font-medium text-gray-600">
+            {habitCount} {habitCount === 1 ? 'habit' : 'habits'}
+          </span>
+        </div>
       </header>
 
       <CreateHabitForm />
 
-      <section className="mt-8">
-        <h2 className="mb-4 text-xl font-semibold text-gray-900">
-          Your habits
-        </h2>
+      <section className="mt-10">
+        <div className="mb-4 flex items-center justify-between">
+          <h2 className="text-xl font-semibold text-gray-900">
+            Your habits
+          </h2>
+        </div>
 
-        {habits?.length === 0 ? (
-          <div className="rounded-lg border border-dashed border-gray-300 p-8 text-center">
+        {habitCount === 0 ? (
+          <div className="rounded-lg border border-dashed border-gray-300 bg-white p-8 text-center">
             <p className="text-gray-600">
               You don't have any habits yet.
             </p>
