@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { getHabits } from '../api/habits';
 import HabitCard from '../components/HabitCard';
+import CreateHabitForm from '../components/CreateHabitForm';
 
 function Dashboard() {
   const {
@@ -23,6 +24,8 @@ function Dashboard() {
   return (
     <div>
       <h1>My Habits</h1>
+
+      <CreateHabitForm />
 
       {habits?.length === 0 ? (
         <p>You don't have any habits yet.</p>

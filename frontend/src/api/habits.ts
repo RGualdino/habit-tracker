@@ -9,8 +9,19 @@ export interface Habit {
   completedToday: boolean;
 }
 
+export interface CreateHabitData {
+  title: string;
+  description?: string;
+}
+
 export const getHabits = async (): Promise<Habit[]> => {
   const response = await api.get<Habit[]>('/habits');
+
+  return response.data;
+};
+
+export const createHabit = async (data: CreateHabitData) => {
+  const response = await api.post<Habit>('/habits', data);
 
   return response.data;
 };
