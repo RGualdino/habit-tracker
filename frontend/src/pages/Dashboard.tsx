@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { getHabits } from '../api/habits';
+import HabitCard from '../components/HabitCard';
 
 function Dashboard() {
   const {
@@ -27,17 +28,7 @@ function Dashboard() {
         <p>You don't have any habits yet.</p>
       ) : (
         habits?.map((habit) => (
-          <div key={habit.id}>
-            <h2>{habit.title}</h2>
-
-            {habit.description && <p>{habit.description}</p>}
-
-            <p>
-              {habit.completedToday
-                ? '✓ Completed today'
-                : 'Not completed today'}
-            </p>
-          </div>
+          <HabitCard key={habit.id} habit={habit} />
         ))
       )}
     </div>

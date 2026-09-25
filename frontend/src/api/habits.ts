@@ -14,3 +14,15 @@ export const getHabits = async (): Promise<Habit[]> => {
 
   return response.data;
 };
+
+export const completeHabit = async (habitId: number) => {
+  const response = await api.post(`/habits/${habitId}/complete`);
+
+  return response.data;
+};
+
+export const uncompleteHabit = async (habitId: number) => {
+  const response = await api.delete(`/habits/${habitId}/complete`);
+
+  return response.data;
+};
