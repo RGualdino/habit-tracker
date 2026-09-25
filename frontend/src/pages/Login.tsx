@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { login } from '../api/auth';
@@ -10,6 +11,7 @@ interface LoginForm {
 
 function Login() {
   const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState('');
 
   const {
     register,
@@ -18,6 +20,8 @@ function Login() {
   } = useForm<LoginForm>();
 
   const onSubmit = async (data: LoginForm) => {
+    setErrorMessage('');
+
     try {
       const response = await login(data);
 
@@ -26,6 +30,7 @@ function Login() {
       navigate('/');
     } catch (error) {
       console.error('LOGIN ERROR:', error);
+      setErrorMessage('Invalid email or password. Please try again.');
     }
   };
 
@@ -91,6 +96,12 @@ function Login() {
                 </p>
               )}
             </div>
+
+            {errorMessage && (
+              <p className="text-sm text-red-600">
+                {errorMessage}
+              </p>
+            )}
 
             <button
               type="submit"

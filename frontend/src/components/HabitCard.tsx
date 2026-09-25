@@ -83,13 +83,19 @@ function HabitCard({ habit }: HabitCardProps) {
 
   return (
     <article
-    className={`relative rounded-lg border p-5 shadow-sm transition-colors ${
+      className={`relative rounded-lg border p-5 shadow-sm transition-colors ${
         habit.completedToday
-        ? 'border-green-200 bg-green-50/30'
-        : 'border-gray-200 bg-white'
-    }`}
+          ? 'border-green-200 bg-green-50/30'
+          : 'border-gray-200 bg-white'
+      }`}
     >
-      <div className={isConfirmingDelete ? 'pointer-events-none opacity-40' : ''}>
+      <div
+        className={
+          isConfirmingDelete
+            ? 'pointer-events-none opacity-40'
+            : ''
+        }
+      >
         <div className="flex items-start justify-between gap-4">
           <div>
             <h2 className="text-xl font-semibold text-gray-900">
@@ -126,7 +132,11 @@ function HabitCard({ habit }: HabitCardProps) {
             type="button"
             onClick={handleToggleComplete}
             disabled={isPending}
-            className="rounded-md bg-black px-4 py-2 text-sm font-medium text-white hover:bg-gray-800 disabled:cursor-not-allowed disabled:opacity-50"
+            className={`rounded-md px-4 py-2 text-sm font-medium disabled:cursor-not-allowed disabled:opacity-50 ${
+              habit.completedToday
+                ? 'border border-green-300 bg-green-100 text-green-700 hover:bg-green-200'
+                : 'bg-black text-white hover:bg-gray-800'
+            }`}
           >
             {completeMutation.isPending || uncompleteMutation.isPending
               ? 'Updating...'

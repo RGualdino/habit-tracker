@@ -52,7 +52,7 @@ function HabitHistory({ habitId }: HabitHistoryProps) {
           return (
             <div
               key={dateKey}
-              className={`flex flex-col items-center rounded-md p-2 ${
+              className={`flex min-h-20 flex-col items-center justify-center rounded-md p-2 ${
                 completed
                   ? 'bg-green-100 text-green-700'
                   : 'bg-white text-gray-400'

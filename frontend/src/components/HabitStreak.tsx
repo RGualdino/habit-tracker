@@ -25,27 +25,27 @@ function HabitStreak({ habitId }: HabitStreakProps) {
 
   return (
     <div>
-        <h3 className="mb-2 text-sm font-medium text-gray-700">
+      <h3 className="mb-2 text-sm font-medium text-gray-700">
         Streak
-        </h3>
+      </h3>
 
-        <div className="grid grid-cols-2 gap-2">
+      <div className="grid grid-cols-2 gap-2">
         <div className="rounded-md border border-gray-200 bg-white px-3 py-2">
-            <p className="text-xs text-gray-500">Current</p>
-            <p className="mt-0.5 text-lg font-semibold text-gray-900">
+          <p className="text-xs text-gray-500">Current</p>
+          <p className="mt-0.5 text-lg font-semibold text-gray-900">
             {data.currentStreak} days
-            </p>
+          </p>
         </div>
 
         <div className="rounded-md border border-gray-200 bg-white px-3 py-2">
-            <p className="text-xs text-gray-500">Longest</p>
-            <p className="mt-0.5 text-lg font-semibold text-gray-900">
+          <p className="text-xs text-gray-500">Longest</p>
+          <p className="mt-0.5 text-lg font-semibold text-gray-900">
             {data.longestStreak} days
-            </p>
+          </p>
         </div>
-        </div>
+      </div>
     </div>
-    );
+  );
 }
 
 export default HabitStreak;

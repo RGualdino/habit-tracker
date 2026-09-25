@@ -89,15 +89,7 @@ function EditHabitForm({ habit, onCancel }: EditHabitFormProps) {
         </div>
       </div>
 
-      <div className="mt-5 flex flex-wrap gap-2">
-        <button
-          type="submit"
-          disabled={updateMutation.isPending}
-          className="rounded-md bg-black px-4 py-2 text-sm font-medium text-white hover:bg-gray-800 disabled:cursor-not-allowed disabled:opacity-50"
-        >
-          {updateMutation.isPending ? 'Saving...' : 'Save changes'}
-        </button>
-
+      <div className="mt-5 flex justify-end gap-2">
         <button
           type="button"
           onClick={onCancel}
@@ -105,6 +97,14 @@ function EditHabitForm({ habit, onCancel }: EditHabitFormProps) {
           className="rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
         >
           Cancel
+        </button>
+
+        <button
+          type="submit"
+          disabled={updateMutation.isPending}
+          className="rounded-md bg-black px-4 py-2 text-sm font-medium text-white hover:bg-gray-800 disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          {updateMutation.isPending ? 'Saving...' : 'Save changes'}
         </button>
       </div>
 

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { register as registerUser } from '../api/auth';
@@ -10,6 +11,7 @@ interface RegisterForm {
 
 function Register() {
   const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState('');
 
   const {
     register,
@@ -21,6 +23,8 @@ function Register() {
   const password = watch('password');
 
   const onSubmit = async (data: RegisterForm) => {
+    setErrorMessage('');
+
     try {
       await registerUser({
         email: data.email,
@@ -30,6 +34,9 @@ function Register() {
       navigate('/login');
     } catch (error) {
       console.error(error);
+      setErrorMessage(
+        'Unable to create your account. Please try again.',
+      );
     }
   };
 
@@ -125,6 +132,12 @@ function Register() {
                 </p>
               )}
             </div>
+
+            {errorMessage && (
+              <p className="text-sm text-red-600">
+                {errorMessage}
+              </p>
+            )}
 
             <button
               type="submit"

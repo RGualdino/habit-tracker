@@ -11,7 +11,7 @@ function Navbar() {
 
   return (
     <header className="border-b border-gray-200 bg-white">
-      <nav className="mx-auto flex max-w-4xl items-center justify-between px-4 py-4">
+      <nav className="mx-auto flex max-w-4xl items-center justify-between px-4 py-3">
         <button
           type="button"
           onClick={() => navigate('/')}
