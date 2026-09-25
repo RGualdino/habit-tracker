@@ -7,6 +7,8 @@ import {
   deleteHabit,
 } from '../api/habits';
 import EditHabitForm from './EditHabitForm';
+import HabitStreak from './HabitStreak';
+import HabitHistory from './HabitHistory';
 
 interface HabitCardProps {
   habit: Habit;
@@ -23,6 +25,12 @@ function HabitCard({ habit }: HabitCardProps) {
       queryClient.invalidateQueries({
         queryKey: ['habits'],
       });
+      queryClient.invalidateQueries({
+        queryKey: ['habit-streak', habit.id],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['habit-history', habit.id],
+      });
     },
   });
 
@@ -31,6 +39,12 @@ function HabitCard({ habit }: HabitCardProps) {
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ['habits'],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['habit-streak', habit.id],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['habit-history', habit.id],
       });
     },
   });
@@ -71,6 +85,10 @@ function HabitCard({ habit }: HabitCardProps) {
       <h2>{habit.title}</h2>
 
       {habit.description && <p>{habit.description}</p>}
+
+      <HabitStreak habitId={habit.id} />
+
+      <HabitHistory habitId={habit.id} />
 
       <button
         type="button"
