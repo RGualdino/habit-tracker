@@ -82,7 +82,13 @@ function HabitCard({ habit }: HabitCardProps) {
   }
 
   return (
-    <article className="relative rounded-lg border border-gray-200 bg-white p-5 shadow-sm">
+    <article
+    className={`relative rounded-lg border p-5 shadow-sm transition-colors ${
+        habit.completedToday
+        ? 'border-green-200 bg-green-50/30'
+        : 'border-gray-200 bg-white'
+    }`}
+    >
       <div className={isConfirmingDelete ? 'pointer-events-none opacity-40' : ''}>
         <div className="flex items-start justify-between gap-4">
           <div>
