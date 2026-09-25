@@ -33,7 +33,7 @@ model HabitLog {
   date DateTime @db.Date @default(now())
 
   habitId Int
-  habit   Habit @relation(fields: [habitId], references: [id])
+  habit Habit @relation(fields: [habitId], references: [id], onDelete: Cascade)
 
   @@unique([habitId, date])
 }
