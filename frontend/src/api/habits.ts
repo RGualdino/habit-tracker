@@ -14,6 +14,11 @@ export interface CreateHabitData {
   description?: string;
 }
 
+export interface UpdateHabitData {
+  title: string;
+  description?: string;
+}
+
 export const getHabits = async (): Promise<Habit[]> => {
   const response = await api.get<Habit[]>('/habits');
 
@@ -26,6 +31,10 @@ export const createHabit = async (data: CreateHabitData) => {
   return response.data;
 };
 
+export const deleteHabit = async (habitId: number) => {
+  await api.delete(`/habits/${habitId}`);
+};
+
 export const completeHabit = async (habitId: number) => {
   const response = await api.post(`/habits/${habitId}/complete`);
 
@@ -34,6 +43,18 @@ export const completeHabit = async (habitId: number) => {
 
 export const uncompleteHabit = async (habitId: number) => {
   const response = await api.delete(`/habits/${habitId}/complete`);
+
+  return response.data;
+};
+
+export const updateHabit = async (
+  habitId: number,
+  data: UpdateHabitData,
+) => {
+  const response = await api.patch<Habit>(
+    `/habits/${habitId}`,
+    data,
+  );
 
   return response.data;
 };

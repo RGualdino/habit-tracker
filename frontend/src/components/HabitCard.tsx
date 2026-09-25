@@ -1,15 +1,20 @@
+import { useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import type { Habit } from '../api/habits';
 import {
   completeHabit,
   uncompleteHabit,
+  deleteHabit,
 } from '../api/habits';
+import EditHabitForm from './EditHabitForm';
 
 interface HabitCardProps {
   habit: Habit;
 }
 
 function HabitCard({ habit }: HabitCardProps) {
+  const [isEditing, setIsEditing] = useState(false);
+
   const queryClient = useQueryClient();
 
   const completeMutation = useMutation({
@@ -30,8 +35,19 @@ function HabitCard({ habit }: HabitCardProps) {
     },
   });
 
+  const deleteMutation = useMutation({
+    mutationFn: deleteHabit,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['habits'],
+      });
+    },
+  });
+
   const isPending =
-    completeMutation.isPending || uncompleteMutation.isPending;
+    completeMutation.isPending || 
+    uncompleteMutation.isPending || 
+    deleteMutation.isPending;
 
   const handleToggleComplete = () => {
     if (habit.completedToday) {
@@ -40,6 +56,15 @@ function HabitCard({ habit }: HabitCardProps) {
       completeMutation.mutate(habit.id);
     }
   };
+
+  if (isEditing) {
+    return (
+      <EditHabitForm
+        habit={habit}
+        onCancel={() => setIsEditing(false)}
+      />
+    );
+  }
 
   return (
     <div>
@@ -55,6 +80,21 @@ function HabitCard({ habit }: HabitCardProps) {
         {habit.completedToday
           ? '✓ Completed today'
           : 'Mark as complete'}
+      </button>
+
+      <button
+        type="button"
+        onClick={() => setIsEditing(true)}
+      >
+        Edit
+      </button>
+
+      <button
+        type="button"
+        onClick={() => deleteMutation.mutate(habit.id)}
+        disabled={isPending}
+      >
+        {deleteMutation.isPending ? 'Deleting...' : 'Delete'}
       </button>
     </div>
   );
