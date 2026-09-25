@@ -79,12 +79,21 @@ function Dashboard() {
           />
         ) : habitCount === 0 ? (
           <div className="rounded-lg border border-dashed border-gray-300 bg-white p-8 text-center">
-            <p className="text-gray-600">
-              You don't have any habits yet.
+            <p className="text-lg font-medium text-gray-900">
+              No habits yet
             </p>
+
             <p className="mt-1 text-sm text-gray-500">
-              Click "Add habit" above to get started.
+              Create your first habit to start building consistency.
             </p>
+
+            <button
+              type="button"
+              onClick={() => setIsCreating(true)}
+              className="mt-5 rounded-md bg-black px-4 py-2 text-sm font-medium text-white hover:bg-gray-800"
+            >
+              Create your first habit
+            </button>
           </div>
         ) : (
           <div className="grid gap-4 md:grid-cols-2">
