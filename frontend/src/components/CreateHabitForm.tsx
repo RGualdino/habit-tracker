@@ -3,7 +3,11 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { createHabit } from '../api/habits';
 import type { CreateHabitData } from '../api/habits';
 
-function CreateHabitForm() {
+interface CreateHabitFormProps {
+  onCancel: () => void;
+}
+
+function CreateHabitForm({ onCancel }: CreateHabitFormProps) {
   const queryClient = useQueryClient();
 
   const {
@@ -21,6 +25,7 @@ function CreateHabitForm() {
       });
 
       reset();
+      onCancel();
     },
   });
 
@@ -79,13 +84,24 @@ function CreateHabitForm() {
         </div>
       </div>
 
-      <button
-        type="submit"
-        disabled={createMutation.isPending}
-        className="mt-5 rounded-md bg-black px-4 py-2 text-sm font-medium text-white hover:bg-gray-800 disabled:cursor-not-allowed disabled:opacity-50"
-      >
-        {createMutation.isPending ? 'Creating...' : 'Create habit'}
-      </button>
+      <div className="mt-5 flex justify-end gap-2">
+        <button
+            type="button"
+            onClick={onCancel}
+            disabled={createMutation.isPending}
+            className="rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
+        >
+            Cancel
+        </button>
+
+        <button
+            type="submit"
+            disabled={createMutation.isPending}
+            className="rounded-md bg-black px-4 py-2 text-sm font-medium text-white hover:bg-gray-800 disabled:cursor-not-allowed disabled:opacity-50"
+        >
+            {createMutation.isPending ? 'Creating...' : 'Create habit'}
+        </button>
+        </div>
 
       {createMutation.isError && (
         <p className="mt-2 text-sm text-red-600">
